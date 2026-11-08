@@ -4,13 +4,14 @@ signal start_game
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	_upd_best()
 
+func _upd_best() -> void:
+	$Best.text = "Best: " + String.num_int64(Records.best)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
-
 
 func show_message(text: String) -> void:
 	$Message.text = text
@@ -18,8 +19,12 @@ func show_message(text: String) -> void:
 	$MessageTimer.start()
 
 
-func show_game_over() -> void:
-	show_message("Game Over")
+func show_game_over(new_record: bool) -> void:
+	var msg := "Game Over"
+	if new_record:
+		msg += "\nNew record!"
+		_upd_best()
+	show_message(msg)
 	
 	await $MessageTimer.timeout
 	

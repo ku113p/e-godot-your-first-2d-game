@@ -20,7 +20,9 @@ func game_over() -> void:
 	score_timer.stop()
 	mob_timer.stop()
 	
-	$HUD.show_game_over()
+	var new_record := Records.submit(score)
+	
+	$HUD.show_game_over(new_record)
 	
 	$Music.stop()
 	$DeathSound.play()
