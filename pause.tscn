@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://db5i872f6tqve"]
+
+[ext_resource type="FontFile" uid="uid://du3sfekdp8pgv" path="res://fonts/Xolonium-Regular.ttf" id="1_45vjg"]
+[ext_resource type="Script" uid="uid://wyxcjub586kg" path="res://pause.gd" id="1_aq7p1"]
+
+[node name="Pause" type="CanvasLayer" unique_id=779858231]
+script = ExtResource("1_aq7p1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=743125654]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6117647)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=578529902]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Box" type="VBoxContainer" parent="CenterContainer" unique_id=1207935341]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="CenterContainer/Box" unique_id=1677971587]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_45vjg")
+theme_override_font_sizes/font_size = 64
+text = "Pause"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/Box" unique_id=526653388]
+custom_minimum_size = Vector2(300, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_45vjg")
+theme_override_font_sizes/font_size = 48
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="CenterContainer/Box" unique_id=166548412]
+custom_minimum_size = Vector2(300, 90)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_45vjg")
+theme_override_font_sizes/font_size = 48
+text = "Restart"
+
+[connection signal="pressed" from="CenterContainer/Box/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CenterContainer/Box/RestartButton" to="." method="_on_restart_button_pressed"]

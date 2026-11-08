@@ -2,8 +2,8 @@ extends Area2D
 
 signal hit
 
-@export var speed = 600
-var screen_size
+@export var speed: int = 600
+var screen_size: Vector2
 
 
 # Called when the node enters the scene tree for the first time.
@@ -42,13 +42,13 @@ func _process(delta: float) -> void:
 	position = position.clamp(Vector2.ZERO, screen_size)
 
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(_body: Node2D) -> void:
 	hide()
 	hit.emit()
 	$CollisionShape2D.set_deferred("disabled", true)
 
 
-func start(pos: Vector2):
+func start(pos: Vector2) -> void:
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
