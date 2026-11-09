@@ -1,10 +1,12 @@
 extends Node
 
 @export var mob_scene: PackedScene
+@export var mob_timer_start_seconds: float
 
 @onready var score_timer: Timer = $World/ScoreTimer
 @onready var mob_timer: Timer = $World/MobTimer
 @onready var start_timer: Timer = $World/StartTimer
+@onready var faster_timer: Timer = $World/FasterTimer
 @onready var player: Area2D = $World/Player
 @onready var start_position: Marker2D = $World/StartPosition
 @onready var mob_spawn_location: PathFollow2D = $World/MobPath/MobSpawnLocation
@@ -12,7 +14,7 @@ extends Node
 
 var score: int
 var playing: bool = false
-
+var faster_multiplier: float = 0.7
 
 func game_over() -> void:
 	playing = false
@@ -20,7 +22,7 @@ func game_over() -> void:
 	score_timer.stop()
 	mob_timer.stop()
 	
-	var new_record := Records.submit(score)
+	var new_record: bool = Records.submit(score)
 	
 	$HUD.show_game_over(new_record)
 	
@@ -65,7 +67,10 @@ func _on_score_timer_timeout() -> void:
 
 
 func _on_start_timer_timeout() -> void:
+	mob_timer.wait_time = mob_timer_start_seconds
+	
 	mob_timer.start()
+	faster_timer.start()
 	score_timer.start()
 
 
@@ -86,3 +91,7 @@ func _on_pause_menu_restart_pressed() -> void:
 
 func _on_pause_menu_resume_pressed() -> void:
 	_set_paused(false)
+
+
+func _on_faster_timer_timeout() -> void:
+	mob_timer.wait_time = snapped(mob_timer.wait_time * faster_multiplier, 0.01)

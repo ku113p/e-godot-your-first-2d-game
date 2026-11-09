@@ -22,6 +22,7 @@ point_count = 5
 process_mode = 3
 script = ExtResource("1_0xm2m")
 mob_scene = ExtResource("2_1bvp3")
+mob_timer_start_seconds = 1.0
 
 [node name="Background" type="ColorRect" parent="." unique_id=1872005293]
 anchors_preset = 15
@@ -47,7 +48,9 @@ process_mode = 1
 [node name="Player" parent="World" unique_id=1808198065 instance=ExtResource("2_h2yge")]
 
 [node name="MobTimer" type="Timer" parent="World" unique_id=1530170961]
-wait_time = 0.5
+
+[node name="FasterTimer" type="Timer" parent="World" unique_id=1127084823]
+wait_time = 10.0
 
 [node name="ScoreTimer" type="Timer" parent="World" unique_id=1088211205]
 
@@ -68,5 +71,6 @@ curve = SubResource("Curve2D_1bvp3")
 [connection signal="resume_pressed" from="PauseMenu" to="." method="_on_pause_menu_resume_pressed"]
 [connection signal="hit" from="World/Player" to="." method="game_over"]
 [connection signal="timeout" from="World/MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="World/FasterTimer" to="." method="_on_faster_timer_timeout"]
 [connection signal="timeout" from="World/ScoreTimer" to="." method="_on_score_timer_timeout"]
 [connection signal="timeout" from="World/StartTimer" to="." method="_on_start_timer_timeout"]
