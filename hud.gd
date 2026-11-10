@@ -1,17 +1,18 @@
+class_name HUD
 extends CanvasLayer
 
 signal start_game
+signal to_main_menu
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
+	hide()
 	_upd_best()
+
 
 func _upd_best() -> void:
 	$Best.text = "Best: " + String.num_int64(Records.best)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
 
 func show_message(text: String) -> void:
 	$Message.text = text
@@ -28,11 +29,20 @@ func show_game_over(new_record: bool) -> void:
 	
 	await $MessageTimer.timeout
 	
+	show_start()
+
+
+func show_start() -> void:
 	$Message.text = "Dodge the Creeps!"
 	$Message.show()
 	
 	await get_tree().create_timer(1.0).timeout
-	$StartButton.show()
+	$Buttons.show()
+
+
+func hide_start() -> void:
+	$Message.hide()
+	$Buttons.hide()
 
 
 func update_score(score: int) -> void:
@@ -40,9 +50,14 @@ func update_score(score: int) -> void:
 
 
 func _on_start_button_pressed() -> void:
-	$StartButton.hide()
+	$Buttons.hide()
 	start_game.emit()
 
 
 func _on_message_timer_timeout() -> void:
 	$Message.hide()
+
+
+func _on_main_menu_pressed() -> void:
+	hide()
+	to_main_menu.emit()

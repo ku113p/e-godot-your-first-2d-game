@@ -48,7 +48,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("1_45vjg")
 theme_override_font_sizes/font_size = 48
-text = "Restart"
+text = "Main Menu"
 
 [connection signal="pressed" from="CenterContainer/Box/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="CenterContainer/Box/RestartButton" to="." method="_on_restart_button_pressed"]

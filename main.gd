@@ -11,10 +11,13 @@ extends Node
 @onready var start_position: Marker2D = $World/StartPosition
 @onready var mob_spawn_location: PathFollow2D = $World/MobPath/MobSpawnLocation
 @onready var pause_menu: PauseMenu = $PauseMenu
+@onready var main_menu: MainMenu = $MainMenu
+@onready var hud: HUD = $HUD
 
 var score: int
 var playing: bool = false
 var faster_multiplier: float = 0.7
+
 
 func game_over() -> void:
 	playing = false
@@ -24,7 +27,7 @@ func game_over() -> void:
 	
 	var new_record: bool = Records.submit(score)
 	
-	$HUD.show_game_over(new_record)
+	hud.show_game_over(new_record)
 	
 	$Music.stop()
 	$DeathSound.play()
@@ -37,8 +40,8 @@ func new_game() -> void:
 	player.start(start_position.position)
 	start_timer.start()
 	
-	$HUD.update_score(score)
-	$HUD.show_message("Get Ready")
+	hud.update_score(score)
+	hud.show_message("Get Ready")
 	
 	$Music.play()
 	$World.get_tree().call_group("mobs", "queue_free")
@@ -63,7 +66,7 @@ func _on_mob_timer_timeout() -> void:
 func _on_score_timer_timeout() -> void:
 	score += 1
 	
-	$HUD.update_score(score)
+	hud.update_score(score)
 
 
 func _on_start_timer_timeout() -> void:
@@ -95,3 +98,11 @@ func _on_pause_menu_resume_pressed() -> void:
 
 func _on_faster_timer_timeout() -> void:
 	mob_timer.wait_time = snapped(mob_timer.wait_time * faster_multiplier, 0.01)
+
+
+func _on_main_menu_play_pressed() -> void:
+	hud.show()
+
+
+func _on_hud_to_main_menu() -> void:
+	main_menu.show()

@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://bekplexndf0jc"]
+
+[ext_resource type="Script" uid="uid://cbapo58hslcxx" path="res://main_menu.gd" id="1_06t4h"]
+
+[node name="MainMenu" type="CanvasLayer" unique_id=1673293914]
+script = ExtResource("1_06t4h")
+
+[node name="All" type="Control" parent="." unique_id=1854261821]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="All" unique_id=662795339]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.8614211, 0.5867527, 7.70092e-07, 1)
+
+[node name="Play" type="Button" parent="All" unique_id=268329625]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.5
+offset_top = -45.5
+offset_right = 64.5
+offset_bottom = 45.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 60
+text = "Play"
+
+[node name="Exit" type="Button" parent="All" unique_id=549668377]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.5
+offset_top = -91.0
+offset_right = 64.5
+grow_horizontal = 2
+grow_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, -20)
+theme_override_font_sizes/font_size = 60
+text = "Exit"
+
+[node name="Best" type="Label" parent="All" unique_id=1976947223]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.5
+offset_right = 64.5
+offset_bottom = 55.0
+grow_horizontal = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(0, 20)
+theme_override_font_sizes/font_size = 40
+text = "Best: 0"
+
+[connection signal="pressed" from="All/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="All/Exit" to="." method="_on_exit_pressed"]

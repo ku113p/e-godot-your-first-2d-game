@@ -14,4 +14,5 @@ func _on_resume_button_pressed() -> void:
 
 
 func _on_restart_button_pressed() -> void:
+	hide()
 	restart_pressed.emit()
